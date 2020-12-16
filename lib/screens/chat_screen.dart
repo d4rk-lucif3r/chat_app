@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class ChatScreen extends StatelessWidget {
+  //final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,11 +20,14 @@ class ChatScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
+          Firebase.initializeApp();
           FirebaseFirestore.instance
               .collection('chats/Irios9aQw4awIHAEe7Op/messages')
               .snapshots()
               .listen((event) {
-            print(event);
+            event.docs.forEach((element) {
+              print(element['text']);
+            });
           });
         },
       ),
