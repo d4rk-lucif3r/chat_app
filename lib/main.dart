@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import './screens/auth_screen.dart';
+import './screens/chat_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Chat App',
       theme: ThemeData(
         primarySwatch: Colors.red,
+        primaryColor: Colors.red,
         accentColor: Colors.amberAccent,
         backgroundColor: Colors.black,
         accentColorBrightness: Brightness.dark,
@@ -30,7 +33,6 @@ class MyApp extends StatelessWidget {
             textTheme: ButtonTextTheme.normal),
         appBarTheme: AppBarTheme(
           centerTitle: true,
-          color: Theme.of(context).primaryColor,
           elevation: 10,
           shadowColor: Colors.white10,
         ),
@@ -54,7 +56,14 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: AuthScreen(),
+      home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (ctx, snapShot) {
+            if (snapShot.hasData) {
+              return ChatScreen();
+            }
+            return AuthScreen();
+          }),
     );
   }
 }
