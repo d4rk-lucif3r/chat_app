@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.red,
         accentColor: Colors.amberAccent,
         backgroundColor: Colors.black,
+        canvasColor: Colors.black,
         accentColorBrightness: Brightness.dark,
         buttonTheme: ButtonThemeData(
             buttonColor: Colors.amberAccent,

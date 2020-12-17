@@ -16,6 +16,7 @@ class _NewMessagesState extends State<NewMessages> {
     FirebaseFirestore.instance.collection('chat').add({
       'text': _enteredMessage,
       'createdAt': Timestamp.now(), 
+      
     });
   }
 
@@ -28,8 +29,16 @@ class _NewMessagesState extends State<NewMessages> {
         children: [
           Expanded(
               child: TextField(
+            style: TextStyle(
+              color: Colors.white,
+            ),
+            cursorColor: Colors.white,
+            enableSuggestions: true,
             controller: _messageController,
-            decoration: InputDecoration(labelText: 'Send a Message..'),
+            decoration: InputDecoration(
+              labelText: 'Send a Message..',
+              labelStyle: TextStyle(color: Colors.white),
+            ),
             onChanged: (value) {
               setState(() {
                 _enteredMessage = value;
@@ -38,7 +47,7 @@ class _NewMessagesState extends State<NewMessages> {
           )),
           IconButton(
             color: Theme.of(context).primaryColor,
-            icon: Icon(Icons.send),
+            icon: Icon(Icons.send, color: Theme.of(context).primaryColor),
             onPressed: _enteredMessage.trim().isEmpty ? null : _sendMessage,
           )
         ],
