@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../widgets/chats/messages.dart';
 
 class ChatScreen extends StatelessWidget {
   @override
@@ -14,10 +15,8 @@ class ChatScreen extends StatelessWidget {
               Icons.more_vert,
               color: Theme.of(context).primaryIconTheme.color,
             ),
-            
             items: [
               DropdownMenuItem(
-
                 child: Container(
                   child: Row(
                     children: [
@@ -42,22 +41,12 @@ class ChatScreen extends StatelessWidget {
           )
         ],
       ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('chats/Irios9aQw4awIHAEe7Op/messages')
-            .snapshots(),
-        builder: (ctx, snapShot) =>
-            snapShot.connectionState == ConnectionState.waiting
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : ListView.builder(
-                    itemCount: snapShot.data.docs.length,
-                    itemBuilder: (ctx, index) => Container(
-                      padding: EdgeInsets.all(8),
-                      child: Text(snapShot.data.docs[index]['text']),
-                    ),
-                  ),
+      body: Container(
+        child: Column(
+          children: [
+            Expanded(child: Messages()),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
