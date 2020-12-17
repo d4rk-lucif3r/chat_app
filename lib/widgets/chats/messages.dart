@@ -5,6 +5,7 @@ import './message_bubble.dart';
 
 class Messages extends StatelessWidget {
   final userid = FirebaseAuth.instance.currentUser.uid;
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -23,12 +24,13 @@ class Messages extends StatelessWidget {
         }
 
         final chats = chatSnapShots.data.docs;
-        
+
         return ListView.builder(
           reverse: true,
           itemBuilder: (ctx, index) => MessageBubble(
             chats[index]['text'],
             chats[index]['userId'] == userid ? true : false,
+            chats[index]['username'],
             key: ValueKey(chats[index].documentID),
           ),
           itemCount: chats.length,
