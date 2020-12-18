@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserImagePicker extends StatefulWidget {
+  final Function(File pickedImage) imagePickFn;
+  UserImagePicker(this.imagePickFn);
   @override
   _UserImagePickerState createState() => _UserImagePickerState();
 }
@@ -25,11 +27,15 @@ class _UserImagePickerState extends State<UserImagePicker> {
                 icon: Icon(Icons.camera),
                 label: Text('Click an Image'),
                 onPressed: () async {
-                  final image =
-                      await picker.getImage(source: ImageSource.camera);
+                  final image = await picker.getImage(
+                    source: ImageSource.camera,
+                    imageQuality: 50,
+                    maxWidth: 150,
+                  );
                   setState(() {
                     _image = File(image.path);
                   });
+                  widget.imagePickFn(_image);
                   Navigator.of(context).pop();
                 },
               ),
@@ -38,12 +44,16 @@ class _UserImagePickerState extends State<UserImagePicker> {
                 label: Text('Select an existing Image'),
                 onPressed: () async {
                   Navigator.of(context).pop();
-                  final image =
-                      await picker.getImage(source: ImageSource.gallery);
+                  final image = await picker.getImage(
+                    source: ImageSource.gallery,
+                    imageQuality: 50,
+                    maxWidth: 150,
+                  );
                   setState(() {
                     _image = File(image.path);
                   });
-                  Navigator.of(context).pop();
+                  widget.imagePickFn(_image);
+                  //Navigator.of(context).pop();
                 },
               ),
             ],
