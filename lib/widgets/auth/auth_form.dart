@@ -32,7 +32,7 @@ class _AuthFormState extends State<AuthForm> {
   void _submit() {
     final isValid = _formKey.currentState.validate();
     FocusScope.of(context).unfocus();
-    if (_userImageFile == null) {
+    if (_userImageFile == null && !_isLogin) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: Theme.of(context).accentColor,
         content: Text('Please add User Image'),

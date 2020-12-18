@@ -23,6 +23,7 @@ class _NewMessagesState extends State<NewMessages> {
       'createdAt': Timestamp.now(),
       'userId': userid,
       'username': userData['username'],
+      'userImage': userData['userImageUrl'],
     });
   }
 

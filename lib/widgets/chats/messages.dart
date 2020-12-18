@@ -31,6 +31,7 @@ class Messages extends StatelessWidget {
             chats[index]['text'],
             chats[index]['userId'] == userid ? true : false,
             chats[index]['username'],
+            chats[index]['userImage'],
             key: ValueKey(chats[index].documentID),
           ),
           itemCount: chats.length,
