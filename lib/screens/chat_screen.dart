@@ -12,12 +12,15 @@ class ChatScreen extends StatelessWidget {
         title: Text('Chat App'),
         actions: [
           DropdownButton(
+            dropdownColor: Colors.white,
             icon: Icon(
               Icons.more_vert,
               color: Theme.of(context).primaryIconTheme.color,
+
             ),
             items: [
               DropdownMenuItem(
+                
                 child: Container(
                   child: Row(
                     children: [
