@@ -36,6 +36,8 @@ class _NewMessagesState extends State<NewMessages> {
         children: [
           Expanded(
               child: TextField(
+            textCapitalization: TextCapitalization.sentences,
+            autocorrect: true,
             style: TextStyle(
               color: Colors.white,
             ),
